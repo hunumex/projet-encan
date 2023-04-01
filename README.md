@@ -16,15 +16,9 @@ Avant de commencer, assurez-vous que vous avez les éléments suivants installé
 Installation et initialisation du projet
 ----------------------------------------
 
-Clonez d'abord le dépôt GitHub sur votre machine locale en utilisant la commande suivante:
-
-bashCopy code
-
-`git clone https://github.com/hunumex/projet-encan.git`
+Clonez d'abord le dépôt GitHub sur votre machine locale :
 
 Accédez au répertoire du projet:
-
-bashCopy code
 
 `cd projet-encan`
 
