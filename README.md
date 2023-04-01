@@ -32,17 +32,15 @@ Restaurez les packages NuGet:
 
 Mettez à jour la chaîne de connexion dans `appsettings.json` avec vos informations d'identification SQL Server:
 
-jsonCopy code
-
 `"ConnectionStrings": {
     "Projet_encan_APIContext": "Server=(local);Database=EncanDB;User Id=your_user;Password=your_password;"
 }`
+
 ou
+
 `"ConnectionStrings": {
-
-    "Projet_encan_APIContext": "Server=(local);Database=encanDB;TrustServerCertificate=True;Trusted_Connection=True;"
-
-  }`
+    "Projet_encan_APIContext": "Server=(local);Database=EncanDB;TrustServerCertificate=True;Trusted_Connection=True;"
+}`
 
 Appliquez les migrations pour créer la base de données:
 
