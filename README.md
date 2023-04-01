@@ -32,13 +32,7 @@ bashCopy code
 
 Accédez au répertoire du backend:
 
-bashCopy code
-
-`cd EncanAPI`
-
 Restaurez les packages NuGet:
-
-bashCopy code
 
 `dotnet restore`
 
@@ -52,41 +46,22 @@ jsonCopy code
 
 Appliquez les migrations pour créer la base de données:
 
-bashCopy code
-
-`dotnet ef database update`
-
-Démarrez l'API:
-
-bashCopy code
-
-`dotnet run`
-
-L'API sera accessible à l'adresse `http://localhost:5000`.
+`dotnet ef database update` ou `Update-DataBase` pour le package Manager
 
 ### Frontend
 
 Ouvrez un nouveau terminal et accédez au répertoire du frontend:
 
-bashCopy code
-
-`cd ../EncanClient`
+Accéder au répertoire racine ClientApp
 
 Installez les dépendances NPM:
 
-bashCopy code
-
 `npm install`
 
-Démarrez l'application Angular:
-
-bashCopy code
-
-`ng serve`
-
-L'application sera accessible à l'adresse `http://localhost:4200`.
 
 Utilisation
 -----------
 
-Vous pouvez maintenant accéder à l'application via votre navigateur à l'adresse `http://localhost:4200`. Profitez de l'application pour gérer des enchères en ligne.
+Démarrez le projet:
+
+L'API sera accessible à l'adresse `http://localhost:7138`.
