@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -19,7 +20,7 @@ namespace Ancan_Context_Service.Migrations
                     FirstName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     LastName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PhoneNomber = table.Column<int>(type: "int", nullable: false)
+                    PhoneNumber = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -41,7 +42,7 @@ namespace Ancan_Context_Service.Migrations
                     VendorName = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VendorEmail = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     VendorPhone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    PostingYear = table.Column<int>(type: "int", nullable: false)
+                    PostingYear = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
