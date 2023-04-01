@@ -128,6 +128,36 @@
 						}
 					},
 					"response": []
+				},
+				{
+					"name": "Create Bidding With Client",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"firstName\": \"Johnyt\",\r\n    \"lastName\": \"doe\",\r\n    \"Email\" : \"Email\",\r\n    \"PhoneNumber\" : \"1234567890\",\r\n    \"BiddingPrice\" : 122,\r\n    \"ItemID\" : 1\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://localhost:7138/api/bidding/wc",
+							"protocol": "https",
+							"host": [
+								"localhost"
+							],
+							"port": "7138",
+							"path": [
+								"api",
+								"bidding",
+								"wc"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		},
@@ -176,13 +206,13 @@
 					"response": []
 				},
 				{
-					"name": "Create Cliebt",
+					"name": "Create Client",
 					"request": {
 						"method": "POST",
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"FirstName\" : \"John\",\r\n    \"LastName\" : \"doe\",\r\n    \"Email\" : \"Email\",\r\n    \"PhoneNumber\" : 1234567890\r\n}",
+							"raw": "{\r\n    \"FirstName\" : \"John\",\r\n    \"LastName\" : \"doe\",\r\n    \"Email\" : \"Email\",\r\n    \"PhoneNumber\" : \"1234567890\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -211,7 +241,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"Id\" : 1,\r\n    \"FirstName\" : \"Dajn\",\r\n    \"LastName\" : \"doe\",\r\n    \"Email\" : \"Email\",\r\n    \"PhoneNumber\" : 1234567890\r\n}",
+							"raw": "{\r\n    \"Id\" : 1,\r\n    \"FirstName\" : \"Dajn\",\r\n    \"LastName\" : \"doe\",\r\n    \"Email\" : \"Email\",\r\n    \"PhoneNumber\" : \"1234567890\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -307,7 +337,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"Name\" : \"admin\",\r\n   \"ImagePath\" : \"Abc123\",\r\n   \"Price\" : 1,\r\n   \"Condition\" : 1,\r\n   \"Description\" : \"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, ducimus dignissimos! Tempora ipsa ex vel ipsum officia nostrum. Itaque temporibus natus atque qui soluta ab quod quaerat id facilis laborum!\",\r\n   \"Available\" : 1,\r\n   \"VendorName\" : \"John Doe\",\r\n   \"VendorEmail\" : \"john.doe@test.com\",\r\n   \"VendorPhone\" : 1234567890,\r\n   \"PostingYear\" : \"2023-04-15\"\r\n}",
+							"raw": "{\r\n   \"Name\" : \"admin\",\r\n   \"ImagePath\" : \"Abc123\",\r\n   \"Price\" : 1,\r\n   \"Condition\" : true,\r\n   \"Description\" : \"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, ducimus dignissimos! Tempora ipsa ex vel ipsum officia nostrum. Itaque temporibus natus atque qui soluta ab quod quaerat id facilis laborum!\",\r\n   \"Available\" : true,\r\n   \"VendorName\" : \"John Doe\",\r\n   \"VendorEmail\" : \"john.doe@test.com\",\r\n   \"VendorPhone\" : \"1234567890\",\r\n   \"PostingYear\" : \"2023-04-15\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -336,7 +366,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n   \"Id\" : 1,\r\n   \"Name\" : \"admin\",\r\n   \"ImagePath\" : \"Abc123\",\r\n   \"Price\" : 1,\r\n   \"Condition\" : 1,\r\n   \"Description\" : \"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, ducimus dignissimos! Tempora ipsa ex vel ipsum officia nostrum. Itaque temporibus natus atque qui soluta ab quod quaerat id facilis laborum!\",\r\n   \"Available\" : 1,\r\n   \"VendorName\" : \"John Doe\",\r\n   \"VendorEmail\" : \"john.doe@test.com\",\r\n   \"VendorPhone\" : 1234567890,\r\n   \"PostingYear\" : \"2023-04-15\"\r\n}",
+							"raw": "{\r\n   \"Id\" : 1,\r\n   \"Name\" : \"admin\",\r\n   \"ImagePath\" : \"Abc123\",\r\n   \"Price\" : 1,\r\n   \"Condition\" : true,\r\n   \"Description\" : \"Lorem, ipsum dolor sit amet consectetur adipisicing elit. Velit, ducimus dignissimos! Tempora ipsa ex vel ipsum officia nostrum. Itaque temporibus natus atque qui soluta ab quod quaerat id facilis laborum!\",\r\n   \"Available\" : true,\r\n   \"VendorName\" : \"John Doe\",\r\n   \"VendorEmail\" : \"john.doe@test.com\",\r\n   \"VendorPhone\" : \"1234567890\",\r\n   \"PostingYear\" : \"2023-04-15\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
