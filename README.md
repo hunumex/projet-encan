@@ -38,17 +38,15 @@ jsonCopy code
     "Projet_encan_APIContext": "Server=(local);Database=EncanDB;User Id=your_user;Password=your_password;"
 }`
 ou
-`
-"ConnectionStrings": {
+`"ConnectionStrings": {
 
-    "Projet_encan_APIContext": "Server=H-COMPUTER\\SQLEXPRESS2;Database=encanDB;TrustServerCertificate=True;Trusted_Connection=True;"
+    "Projet_encan_APIContext": "Server=(local);Database=encanDB;TrustServerCertificate=True;Trusted_Connection=True;"
 
-  }
-`
+  }`
 
 Appliquez les migrations pour créer la base de données:
 
-`dotnet ef database update` ou `Update-DataBase` pour le package Manager
+`dotnet ef database update` ou `Update-DataBase` pour le package Manager Console
 
 ### Frontend
 
@@ -60,10 +58,9 @@ Installez les dépendances NPM:
 
 `npm install`
 
-
 Utilisation
 -----------
 
 Démarrez le projet:
 
-L'API sera accessible à l'adresse `http://localhost:7138`.
+L'API sera accessible à l'adresse `http://localhost:7138` ou autre.
