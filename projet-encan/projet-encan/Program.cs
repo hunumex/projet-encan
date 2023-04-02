@@ -5,6 +5,7 @@ using Encan_Services.Services.S_Client;
 using Encan_Services.Services.S_Item;
 using Encan_Services.Services.S_User;
 using Microsoft.EntityFrameworkCore;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,6 +17,18 @@ builder.Services.AddScoped<IUserService, UserService>();
 
 SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
 
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DEFAULT_POLICY", policy =>
+    {
+        policy.WithOrigins("*")
+               .AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Projet_encan_APIContext")));
 
@@ -30,6 +43,7 @@ if (!app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
+app.UseCors("DEFAULT_POLICY");
 app.UseRouting();
 
 

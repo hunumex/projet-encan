@@ -1,0 +1,37 @@
+<div class="bg">
+  
+  <div class="login_content">
+    <div class="logo">
+
+    </div>
+    <div class="center">
+      <h1>Ouverture</h1>
+      <div *ngIf="messageError" class="alert alert-danger">
+        {{messageError}}
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="txt_field">
+          <input type="text" formControlName="userName" [ngClass]="{ 'is-invalid': submitted && f.userName.errors }">
+          <span></span>
+          <label for="identifiant">Username</label>
+          <div *ngIf="f.userName.errors" class="invalid-feedback">
+            <div *ngIf="f.userName.errors.required" class="text-danger">userName est obligatoire</div>
+          </div>
+        </div>
+        <div class="txt_field">
+          <input type="password" formControlName="password" [ngClass]="{ 'is-invalid': submitted && f.password.errors }">
+          <span></span>
+          <label for="password">Password</label>
+          <div *ngIf="f.password.errors" class="invalid-feedback">
+            <div *ngIf="f.password.errors.required" class="text-danger">
+              le mot de passe est obligatoire
+            </div>
+          </div>
+        </div>
+        <input type="submit" value="Ouvrir">
+      </form> <br />
+    </div>
+  </div>
+ 
+</div>
+

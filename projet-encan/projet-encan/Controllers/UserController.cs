@@ -21,7 +21,16 @@ namespace projet_encan.Controllers
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginDto user)
         {
-            return Ok(await _userService.Login(user));
+            try
+            {
+                return Ok(await _userService.Login(user));
+            }
+            catch (Exception e)
+            {
+
+                return Unauthorized(e.Message);
+            }
+            
         }
     }
 }
