@@ -92,3 +92,5 @@ Démarrez le projet:
 Vous pouvez utiliser la collection pour faire vos tests de l'api sur postman
 
 L'API sera accessible à l'adresse `http://localhost:7138` ou autre.
+
+ps: je suis fou
