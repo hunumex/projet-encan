@@ -13,6 +13,7 @@ namespace Encan_Services.Services.S_Bidding
         Task AddBidAsync(int bid, Client client, int itenID);
         Task<List<Bidding>> GetBidsAsync();
         Task<Bidding> GetBidAsync(int id);
+        Task<List<Bidding>> GetBidByItemIdAsync(int itemID);
         Task UpdateBidAsync(Bidding bid);
         Task DeleteBidAsync(int id);
     }

@@ -1,0 +1,30 @@
+<app-nav-menu></app-nav-menu>
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Description</th>
+        <th>Vendor Name</th>
+        <th>Last Bidding</th>
+        <th>Posting Year</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of items">
+        <td><img src="{{ item.imagePath }}" alt="{{ item.name }}" height="50"></td>
+        <td>{{ item.name }}</td>
+        <td>{{ item.description }}</td>
+        <td>{{ item.vendorName }}</td>
+        <td>{{ item.price }}</td>
+        <td>{{ item.postingYear }}</td>
+        <td><button class="btn btn-primary" [routerLink]="['/bidding', item.id]">Bidding</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<app-footer></app-footer>

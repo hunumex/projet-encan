@@ -69,6 +69,16 @@ namespace Encan_Services.Services.S_Bidding
 
             return bid;
         }
+        public async Task<List<Bidding>> GetBidByItemIdAsync(int itemID)
+        {
+            if(itemID < 0) throw new ArgumentNullException(nameof(itemID));
+
+            var bidding = await _context.Biddings.Where(b => b.ItemID == itemID).ToListAsync();
+
+            if (bidding.Count == 0) throw new Exception("Cet item n'a pas encore était enchéri.");
+
+            return bidding;
+        }
 
         public async Task UpdateBidAsync(Bidding bid)
         {
