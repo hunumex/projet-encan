@@ -52,6 +52,7 @@ namespace Encan_Services.Services.S_Item
 
             if (itemTemp == null) throw new ArgumentException($"{nameof(item)} no exists.");
 
+            _context.Entry(itemTemp).State = EntityState.Detached;
             _context.Items.Update(item);
             await _context.SaveChangesAsync();
         }

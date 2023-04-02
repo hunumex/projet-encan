@@ -27,6 +27,7 @@ namespace projet_encan.Controllers
         public async Task<ActionResult<Client>> GetAsync(int id)
         {
             var client = await _clientService.GetClientAsync(id);
+
             return Ok(client);
         }
 
@@ -37,7 +38,12 @@ namespace projet_encan.Controllers
 
             await _clientService.AddClientAsync(client);
 
-            return Created(nameof(GetAsync), new { id = client.Id });
+            return new ContentResult
+            {
+                ContentType = "text/plain",
+                StatusCode = 201,
+                Content = "Le client est bien enregistré."
+            };
         }
 
         [HttpPut]
@@ -47,14 +53,25 @@ namespace projet_encan.Controllers
 
             await _clientService.UpdateClientAsync(client);
 
-            return Ok();
+            return new ContentResult
+            {
+                ContentType = "text/plain",
+                StatusCode = 200,
+                Content = "Le client a bien été modifiée."
+            };
         }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Client>> DeleteClientAsync(int id)
         {
             if (GetAsync(id) == null) return NotFound();
             await _clientService.DeleteClientAsync(id);
-            return NoContent();
+
+            return new ContentResult
+            {
+                ContentType = "text/plain",
+                StatusCode = 200,
+                Content = "Le client a bien été supprimée."
+            };
         }
     }
 }

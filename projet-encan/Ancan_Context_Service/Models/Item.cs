@@ -18,7 +18,7 @@ namespace Ancan_Context_Service.Models
         public string? VendorName { get; set; }
         public string? VendorEmail { get; set; }
         public string? VendorPhone { get; set; }
-        public int PostingYear { get; set; }
+        public DateTime PostingYear { get; set; }
         public ICollection<Bidding>? Biddings { get; set; }
     }
 }

@@ -32,7 +32,7 @@ namespace Encan_Services.Services.S_Client
         {
             var client = await _context.Clients.FindAsync(id);
 
-            if (client == null) throw new ArgumentException("Client not found.");
+            if (client == null) throw new Exception("Client not found.");
             return client;
         }
 
@@ -43,6 +43,7 @@ namespace Encan_Services.Services.S_Client
 
             if (clientTemp == null) throw new ArgumentException($"{nameof(client)} no exists.");
 
+            _context.Entry(clientTemp).State = EntityState.Detached;
             _context.Clients.Update(client);
             await _context.SaveChangesAsync();
         }
