@@ -1,4 +1,5 @@
 using Ancan_Context_Service.Services.AncanDb;
+using Encan_Services.ExtensionMethods;
 using Encan_Services.Services.S_Bidding;
 using Encan_Services.Services.S_Client;
 using Encan_Services.Services.S_Item;
@@ -7,19 +8,16 @@ using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
-//add configure of appsetting
-IConfigurationRoot Configuration;
-var builderAppSetting = new ConfigurationBuilder().AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
-Configuration = builderAppSetting.Build();
-
 // Add services to the container.
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IBiddingService, BiddingService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IUserService, UserService>();
 
+SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
+
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Projet_encan_APIContext")));
+builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Projet_encan_APIContext")));
 
 var app = builder.Build();
 
