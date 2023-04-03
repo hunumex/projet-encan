@@ -30,8 +30,17 @@ builder.Services.AddCors(options =>
 builder.Services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Projet_encan_APIContext")));
-
+builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("Projet_encan_APIContext")));
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("DEFAULT_POLICY", policy =>
+    {
+        policy.WithOrigins("*")
+               .AllowAnyOrigin()
+               .AllowAnyHeader()
+               .AllowAnyMethod();
+    });
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -45,7 +54,7 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("DEFAULT_POLICY");
 app.UseRouting();
-
+app.UseCors("DEFAULT_POLICY");
 
 app.MapControllerRoute(
     name: "default",

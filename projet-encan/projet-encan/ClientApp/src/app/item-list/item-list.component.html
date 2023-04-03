@@ -1,0 +1,41 @@
+<h1>Items</h1>
+<p *ngIf="!items"><em>Loading...</em></p>
+<app-item-add *ngIf="idItem==0"></app-item-add>
+<app-item-update></app-item-update>
+<table *ngIf="items" class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Nom</th>
+      <th>Image</th>
+      <th>prix</th>
+      <th>Condition</th>
+      <th>description</th>
+      <th>available</th>
+      <th>vendorName</th>
+      <th>vendorEmail</th>
+      <th>vendorPhone</th>
+      <th>postingYear</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>{{item.name}}</td>
+      <td>{{item.imagePath}}</td>
+      <td>{{ item.price}}</td>
+      <td>{{ item.condition}}</td>
+      <td>{{ item.description}}</td>
+      <td>{{ item.available}}</td>
+      <td>{{ item.vendorName}}</td>
+      <td>{{ item.vendorEmail}}</td>
+      <td>{{ item.vendorPhone}}</td>
+      <td>{{ item.postingYear}}</td>
+      <td>
+        <button type="button" (click)="deleteItem(item.id)" class="btn btn-danger">Delete</button>&nbsp;
+        <button type="button" (click)="updateItem(item.id)" class="btn btn-secondary">Edit</button>
+      </td>
+    </tr>
+  </tbody>
+</table>

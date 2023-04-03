@@ -9,6 +9,9 @@ import { NavMenuComponent } from './nav-menu/nav-menu.component';
 import { HomeComponent } from './home/home.component';
 import { CounterComponent } from './counter/counter.component';
 import { FetchDataComponent } from './fetch-data/fetch-data.component';
+import { ItemListComponent } from './item-list/item-list.component';
+import { ItemAddComponent } from './item-add/item-add.component';
+import { ItemUpdateComponent } from './item-update/item-update.component';
 import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 
@@ -26,6 +29,10 @@ const routes: Routes = [
     NavMenuComponent,
     HomeComponent,
     CounterComponent,
+    FetchDataComponent,
+    ItemListComponent,
+    ItemAddComponent,
+    ItemUpdateComponent
     FetchDataComponent,
     LoginComponent,
     ContactComponent
