@@ -129,5 +129,8 @@
       }
     }
   },
-  "defaultProject": "projet_encan"
+  "defaultProject": "projet_encan",
+  "cli": {
+    "analytics": "8b3fb4d9-51cd-406a-af12-35c63bda79d7"
+  }
 }
