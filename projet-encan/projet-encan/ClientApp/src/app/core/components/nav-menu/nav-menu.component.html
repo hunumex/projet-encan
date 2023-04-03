@@ -1,0 +1,24 @@
+<header>
+  <nav id="top">
+    <h3>l'Encan de l'Espoir</h3>
+    <ul>
+      <li><a [routerLink]="['/home']">Accueil</a></li>
+      <li><a [routerLink]="['/admin']">Espace Admin</a></li>
+      <li><a [routerLink]="['/rapport']">Rapport</a></li>
+      <li><a [routerLink]="['/contact']">Contactez-nous</a></li>
+      <li id="logout" (click)="deconnexion()">Deconnexion</li>
+
+    </ul>
+  </nav>
+  <nav id="bottom">
+    <div class="img">
+      <a [routerLink]="['/home']">
+        <img src="../../../../assets/images/logo.png" alt="" srcset="">
+      </a>
+    </div>
+    <div id="text-banier">
+      <h2>Donner pour l&rsquo;espoir, Donner pour la vie !</h2>
+    </div>
+  </nav>
+</header>
+

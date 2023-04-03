@@ -30,6 +30,20 @@ namespace projet_encan.Controllers
 
             return Ok(bid);
         }
+        [HttpGet("item/{id}")]
+        public async Task<IActionResult> GetBidByItemIdAsync(int id)
+        {
+            List<Bidding> bid;
+            try
+            {
+                bid = await _biddingService.GetBidByItemIdAsync(id);
+            }catch(Exception ex)
+            {
+                return NotFound(ex.Message);
+            }
+
+            return Ok(bid.LastOrDefault());
+        }
 
         [HttpPost]
         public async Task<ActionResult<Bidding>> PostBidAsync(Bidding bid)
@@ -58,12 +72,7 @@ namespace projet_encan.Controllers
             };
 
             await _biddingService.AddBidAsync(req.BiddingPrice, client, req.ItemID);
-            return new ContentResult
-            {
-                ContentType = "text/plain",
-                StatusCode = 201,
-                Content = "L'enchère a bien été faite."
-            };
+            return StatusCode(201, "L'enchère a bien été faite.");
         }
 
         [HttpPut]
