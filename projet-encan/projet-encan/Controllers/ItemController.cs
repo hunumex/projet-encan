@@ -1,4 +1,5 @@
 ﻿using Ancan_Context_Service.Models;
+using Ancan_Context_Service.Models.DTOs;
 using Encan_Services.Services.S_Item;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -30,7 +31,7 @@ namespace projet_encan.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Item>> PostItemAsync(Item item)
+        public async Task<ActionResult<Item>> PostItemAsync([FromForm]ItemDTO item)
         {
             if (item == null) return BadRequest();
 

@@ -1,5 +1,8 @@
 ﻿using Ancan_Context_Service.Models;
+using Ancan_Context_Service.Models.DTOs;
 using Ancan_Context_Service.Services.AncanDb;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +19,21 @@ namespace Encan_Services.Services.S_Item
         {
             _context = context;
         }
-        public async Task AddItemAsync(Item item)
+        public async Task AddItemAsync([FromForm]ItemDTO item)
         {
-            await _context.Items.AddAsync(item);
+            Item itemDB = new Item() { 
+                Name= item.Name,
+                Available= item.Available,
+                Condition=item.Condition,
+                Price=item.Price,
+                Description= item.Description,
+                VendorEmail= item.VendorEmail,
+                VendorName= item.VendorName,
+                VendorPhone= item.VendorPhone,
+
+            };
+            await SaveImage(item.ImagePath, itemDB);
+            await _context.Items.AddAsync(itemDB);
             await _context.SaveChangesAsync();
         }
 
@@ -55,6 +70,27 @@ namespace Encan_Services.Services.S_Item
             _context.Entry(itemTemp).State = EntityState.Detached;
             _context.Items.Update(item);
             await _context.SaveChangesAsync();
+        }
+        private async Task<bool> SaveImage(IFormFile file, Item item)
+        {
+            var pathBuilt = Path.Combine("Wwwroot\\images");
+            if (!Directory.Exists(pathBuilt))
+            {
+                Directory.CreateDirectory(pathBuilt);
+            }
+            var extension = "." + file.FileName.Split('.')[file.FileName.Split('.').Length - 1];
+            if (extension != ".png" && extension != ".jpeg" && extension != ".jpg")
+            {
+                throw  new Exception("Probleme rencontr'e durant l'upload") ;
+            }
+            string fileName = Guid.NewGuid().ToString() + "_" + file.FileName;
+            pathBuilt = Path.Combine("wwwroot\\images", fileName);
+            using (var steam = new FileStream(pathBuilt, FileMode.Create))
+            {
+                await file.CopyToAsync(steam);
+            }
+            item.ImagePath = Path.Combine("images", fileName); ;
+            return true;
         }
     }
 }

@@ -1,0 +1,32 @@
+
+<div class="row justify-content-md-center">
+  <
+    <div class="col-5">
+      <h4 id="tableLabel"> Information sur l'article</h4>
+      <label>Nom:</label><input type="text" class="form-control" [(ngModel)]="item.name" />
+      <label>prix:</label><input type="number" class="form-control" [(ngModel)]="item.price" />
+      <label>condition:</label>
+      <select [(ngModel)]="item.condition" class="form-select" value="" required>
+        <option value="">-- Selectionner l'état de l'article -- </option>
+        <option value=true>Neuf</option>
+        <option value=false>Usage</option>
+      </select>
+      <label>image:</label> <input (change)="onFileSelected($event)" type="file" id="imageItem" accept="image/*" class="form-control" required>
+
+      <label>disponible:</label>
+      <select [(ngModel)]="item.available" class="form-select" value="" required>
+        <option value="">-- Selectionner la disponibilité de l'article -- </option>
+        <option value=true>Oui</option>
+        <option value=false>Non</option>
+      </select>
+      <label>description:</label><textarea rows="4" cols="50" class="form-control" [(ngModel)]="item.description"></textarea>
+
+      <h4 id="tableLabel"> Information sur le vendeur</h4>
+      <label>nom et prenom:</label><input type="text" class="form-control" [(ngModel)]="item.vendorName" />
+      <label>Adresse email:</label><input type="email" class="form-control" [(ngModel)]="item.vendorEmail" />
+      <label>Numero de telephone:</label><input type="text" class="form-control" [(ngModel)]="item.vendorPhone" />
+
+      <input class="btn btn-primary mb-3" type="submit" (click)="addItem()" value="save" />
+    </div>
+  
+</div>
