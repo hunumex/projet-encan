@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import {HomeComponent} from "./modules/home/home.component";
 import {BiddingComponent} from "./modules/bidding/bidding.component";
+import { RapportComponent } from './modules/rapport/rapport.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {BiddingComponent} from "./modules/bidding/bidding.component";
     ContactComponent,
     HomeComponent,
     BiddingComponent,
+    RapportComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

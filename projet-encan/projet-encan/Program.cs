@@ -3,6 +3,7 @@ using Encan_Services.ExtensionMethods;
 using Encan_Services.Services.S_Bidding;
 using Encan_Services.Services.S_Client;
 using Encan_Services.Services.S_Item;
+using Encan_Services.Services.S_Rapport;
 using Encan_Services.Services.S_User;
 using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
@@ -14,6 +15,7 @@ builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IBiddingService, BiddingService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<IRapportService, RapportService>();
 
 SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
 

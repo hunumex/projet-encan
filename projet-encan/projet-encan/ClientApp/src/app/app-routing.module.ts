@@ -5,6 +5,7 @@ import {FetchDataComponent} from "./fetch-data/fetch-data.component";
 import {LoginComponent} from "./login/login.component";
 import {ContactComponent} from "./contact/contact.component";
 import {BiddingComponent} from "./modules/bidding/bidding.component";
+import { RapportComponent } from './modules/rapport/rapport.component';
 
 const routes: Routes =
   [
@@ -13,6 +14,7 @@ const routes: Routes =
     { path: 'fetch-data', component: FetchDataComponent },
     { path: 'contact', component: ContactComponent },
     { path: 'bidding/:id', component: BiddingComponent },
+    { path: 'rapport', component: RapportComponent }
   ];
 
 @NgModule({
