@@ -12,6 +12,8 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import {HomeComponent} from "./modules/home/home.component";
 import {BiddingComponent} from "./modules/bidding/bidding.component";
+import {TokenInterceptorProvider} from "./core/services/token.interceptor";
+import {CookieService} from "ngx-cookie";
 
 @NgModule({
   declarations: [
@@ -31,7 +33,7 @@ import {BiddingComponent} from "./modules/bidding/bidding.component";
     ReactiveFormsModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [TokenInterceptorProvider, CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

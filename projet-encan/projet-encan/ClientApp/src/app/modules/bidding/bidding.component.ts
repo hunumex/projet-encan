@@ -13,26 +13,26 @@ export class BiddingComponent implements OnInit {
 
 itenId: number;
 item!: any;
-bidByItem!: any;
+bidByItem: any = null;
 client!: any;
+validator: number = 0;
 
   constructor(private ApiService: ApiService, private route: ActivatedRoute, private routeNavigate: Router) {
-    this.itenId = this.route.snapshot.params['id'];
+    this.itenId = parseInt(this.route.snapshot.params['id']);
   }
 
   ngOnInit(): void {
     this.ApiService.getData({id: this.itenId}).item.subscribe(data => { this.item = data; }, error => console.error(error));
 
     this.ApiService.getData({id: this.itenId}).biddingByItem.subscribe(data => {
-      console.log(data);
       this.bidByItem = data;
 
       this.ApiService.getData({id: this.bidByItem.clientId}).client.subscribe(data => {
-        console.log(data);
         this.client = data;
       }, error => console.error(error));
 
     }, error => console.error("Cet item n'a pas encore était enchéri."));
+
   }
 
   public bidding(){
@@ -42,12 +42,6 @@ client!: any;
     const phonenumber = document.querySelector('#phonenumber') as HTMLInputElement
     const bidprice = document.querySelector('#bidprice') as HTMLInputElement
 
-    this.firstnameValidat();
-    this.lastnameValidat();
-    this.emailValidat();
-    this.phonenumberValidat();
-    this.bidpriceValidat();
-
     const bid = new Bidding
     (
       firstname.value,
@@ -55,23 +49,16 @@ client!: any;
       email.value,
       phonenumber.value,
       parseInt(bidprice.value),
+      this.itenId
     );
-    console.log(bid);
-    this.ApiService.addData({
-      firstName: firstname.value,
-      lastName: lastname.value,
-      email: email.value,
-      phoneNumber: phonenumber.value,
-      biddingPtice: parseInt(bidprice.value),
-    }).addBidding.subscribe(data => {
-      console.log("Bidding effectue");
-      console.log(data);
-      console.log("rout1");
-      this.routeNavigate.navigate(['/home']);
-      console.log("rout2");
-    });
 
+    if(this.lastnameValidat() && this.firstnameValidat() && this.emailValidat() && this.phonenumberValidat() && this.bidpriceValidat()){
+      this.ApiService.addData(bid).addBidding.subscribe(data => {
+        this.routeNavigate.navigate(['/home', {biddingSuccess: true}]);
+      }, error => console.error(error));
+    }
   }
+
 
   public clear(){
     const firstname = document.querySelector('#firstName') as HTMLInputElement
@@ -106,67 +93,68 @@ client!: any;
     const firstname = document.querySelector('#firstName') as HTMLInputElement
     if (!firstname.value) {
       firstname.classList.add('is-invalid');
-      return;
+      return false;
     }else{
       firstname.classList.remove('is-invalid');
       firstname.classList.add('is-valid');
+      return true;
     }
   }
   public lastnameValidat(){
     const lastname = document.querySelector('#lastname') as HTMLInputElement
     if (!lastname.value) {
       lastname.classList.add('is-invalid');
-      return;
+      return false;
     }else{
       lastname.classList.remove('is-invalid');
       lastname.classList.add('is-valid');
+      return true;
   }
 }
   public emailValidat(){
     const email = document.querySelector('#email') as HTMLInputElement
-    if (!email.value) {
+    if (!email.value && !email.validity.valid) {
       email.classList.add('is-invalid');
-      return;
+      return false;
     }else{
       email.classList.remove('is-invalid');
       email.classList.add('is-valid');
-    }
-    if (!email.validity.valid) {
-      email.classList.add('is-invalid');
-      return;
-    }else{
-      email.classList.remove('is-invalid');
-      email.classList.add('is-valid');
+      return true;
     }
   }
   public phonenumberValidat(){
     const phonenumber = document.querySelector('#phonenumber') as HTMLInputElement
     if (!phonenumber.value) {
       phonenumber.classList.add('is-invalid');
-      return;
+      return false;
     }else{
       phonenumber.classList.remove('is-invalid');
       phonenumber.classList.add('is-valid');
+      return true;
     }
   }
   public bidpriceValidat(){
     const bidprice = document.querySelector('#bidprice') as HTMLInputElement
     if (!bidprice.value) {
       bidprice.classList.add('is-invalid');
-      return;
+      return false;
     }else{
-      bidprice.classList.remove('is-invalid');
-      bidprice.classList.add('is-valid');
-    }
-    if(this.bidByItem.biddingPrice){
-      if(parseInt(bidprice.value) <= this.bidByItem.biddingPrice){
-        bidprice.classList.add('is-invalid');
-        return;
-      }
-      else{
+      if(this.bidByItem != null){
+        if(parseInt(bidprice.value) <= this.bidByItem.biddingPrice){
+          bidprice.classList.add('is-invalid');
+          return false;
+        }
+        else{
+          bidprice.classList.remove('is-invalid');
+          bidprice.classList.add('is-valid');
+          return true;
+        }
+      }else{
         bidprice.classList.remove('is-invalid');
         bidprice.classList.add('is-valid');
+        return true
       }
     }
+
   }
 }

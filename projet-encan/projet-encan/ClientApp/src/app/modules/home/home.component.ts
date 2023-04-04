@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../core/services/http.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -10,14 +10,18 @@ import {Router} from "@angular/router";
 export class HomeComponent implements OnInit {
 
   items!: any;
+  biddingSuccess: boolean = true;
+  lastBiddings!: any;
 
-  constructor(private ApiService: ApiService, private route: Router) { }
+  constructor(private ApiService: ApiService) {
+  }
 
   ngOnInit(): void {
     this.ApiService.getData().itemList.subscribe(data => {
-      console.log(data)
       this.items = data;
-    }, error => console.error(error));
+      this.ApiService.getData({id: 1}).biddingByItem.subscribe(data => {
+      }, error => console.error("Get Bidding By Item", error));
+    }, error => console.error("Get Item List", error));
   }
 
 }

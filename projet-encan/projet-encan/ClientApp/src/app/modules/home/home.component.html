@@ -1,30 +1,39 @@
 <app-nav-menu></app-nav-menu>
-<div class="container mt-4">
-  <div class="table-responsive">
-    <table class="table table-striped">
-      <thead>
-      <tr>
-        <th>Image</th>
-        <th>Name</th>
-        <th>Description</th>
-        <th>Vendor Name</th>
-        <th>Last Bidding</th>
-        <th>Posting Year</th>
-        <th></th>
-      </tr>
-      </thead>
-      <tbody>
-      <tr *ngFor="let item of items">
-        <td><img src="{{ item.imagePath }}" alt="{{ item.name }}" height="50"></td>
-        <td>{{ item.name }}</td>
-        <td>{{ item.description }}</td>
-        <td>{{ item.vendorName }}</td>
-        <td>{{ item.price }}</td>
-        <td>{{ item.postingYear }}</td>
-        <td><button class="btn btn-primary" [routerLink]="['/bidding', item.id]">Bidding</button></td>
-      </tr>
-      </tbody>
-    </table>
+<div id="container">
+  <div id="b-container">
+    <div id="title" class="shadow-sm">
+      <h4 style="margin-top: 10px;" class="text-center mb-4">Liste des articles</h4>
+    </div>
+    <div id="b-top">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <div class="col mb-3" *ngFor="let item of items">
+          <div class="card h-100 shadow-sm">
+            <img src="../../../../assets/images/89.jpg" class="card-img-top" alt="{{ item.name }}">
+            <div class="card-body">
+              <h5 class="card-title">{{ item.name }}</h5>
+              <p class="card-text">{{ item.description | slice:0:100 }}{{ item.description.length > 100 ? '...' : '' }}</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Dernière enchère : {{ item.price }}</li>
+              <li class="list-group-item">Vendeur : {{ item.vendorName }}</li>
+            </ul>
+            <div class="card-body d-grid gap-2">
+              <a href="#" class="btn btn-primary" [routerLink]="['/bidding', item.id]">ENCHERIR</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div id="b-alert" >
+    <div  style="height: 50px;" class="alert alert-success d-flex align-items-center" role="alert">
+      <svg style="width: 20px;" class="bi flex-shrink-0 me-2" role="img" aria-label="Success:"><use xlink:href="#check-circle-fill"/></svg>
+      <div>
+        L'enchère a été bien effectuée.
+      </div>
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

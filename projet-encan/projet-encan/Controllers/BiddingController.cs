@@ -72,7 +72,11 @@ namespace projet_encan.Controllers
             };
 
             await _biddingService.AddBidAsync(req.BiddingPrice, client, req.ItemID);
-            return StatusCode(201, "L'enchère a bien été faite.");
+            return new JsonResult(new
+            {
+                StatusCode = 201,
+                message = "L'enchère a bien été faite.",
+            });
         }
 
         [HttpPut]

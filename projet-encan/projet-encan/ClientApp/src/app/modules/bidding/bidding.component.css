@@ -1,3 +1,12 @@
+#container{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  background-color: #f7f7f7;
+  width: 100%;
+  height: auto;
+}
 #b-container{
   display: flex;
   flex-direction: column;
