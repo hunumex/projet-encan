@@ -12,6 +12,7 @@ import { LoginComponent } from './login/login.component';
 import { ContactComponent } from './contact/contact.component';
 import {HomeComponent} from "./modules/home/home.component";
 import {BiddingComponent} from "./modules/bidding/bidding.component";
+import { RapportComponent } from './modules/rapport/rapport.component';
 import {TokenInterceptorProvider} from "./core/services/token.interceptor";
 import {CookieService} from "ngx-cookie";
 
@@ -25,6 +26,7 @@ import {CookieService} from "ngx-cookie";
     ContactComponent,
     HomeComponent,
     BiddingComponent,
+    RapportComponent
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'ng-cli-universal' }),

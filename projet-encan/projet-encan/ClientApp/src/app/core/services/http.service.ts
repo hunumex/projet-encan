@@ -19,6 +19,7 @@ export class ApiService{
       client: this.http.get(environment.url + `client/${data.id}`),
       itemList: this.http.get(environment.url + `item`),
       item: this.http.get(environment.url + `item/${data.id}`),
+      rapportList: this.http.get(environment.url + `rapport`)
     };
   };
 
