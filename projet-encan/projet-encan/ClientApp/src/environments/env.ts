@@ -8,6 +8,7 @@ export const env = {
   rout_url:{
     home: "",
     login: "login",
+    user: "user",
     item: "item",
     bidding: "bidding",
     bidding_wc: "bidding/wc",

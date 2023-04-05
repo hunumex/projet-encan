@@ -1,6 +1,8 @@
 ﻿using Ancan_Context_Service.Models;
 using Ancan_Context_Service.Models.DTOs;
 using Encan_Services.Services.S_Item;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,6 +10,7 @@ namespace projet_encan.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class ItemController : ControllerBase
     {
         readonly IItemService _itemService;

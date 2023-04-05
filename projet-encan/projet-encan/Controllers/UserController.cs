@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace projet_encan.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
     {

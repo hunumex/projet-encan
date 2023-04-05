@@ -37,7 +37,7 @@ export class ApiService{
       addBidding: this.http.post(env.base_url + env.rout_url.bidding_wc, data),
       addClient: this.http.post(env.base_url + env.rout_url.client, data),
       addItem: this.http.post(env.base_url + env.rout_url.item, data),
-      login: this.http.post(`https://localhost:7138/user/`, data),
+      login: this.http.post(env.base_url + env.rout_url.user, data),
     };
   };
 

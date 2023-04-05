@@ -2,8 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { env } from '../../environments/env';
 import {IUserInfo} from "../core/interfaces/IUserInfo";
-import {UserAuth} from "../core/models/userAuth.model";
+import { UserAuth } from '../core/models/UserAuth.model';
 import {TokenService} from "../core/services/token.service";
 
 @Component({
@@ -46,7 +47,7 @@ export class LoginComponent {
   get f() { return this.loginForm.controls; }
 
   login(userAuth: UserAuth) {
-    this.httpClient.post<IUserInfo>(`https://localhost:7138/user`, userAuth)
+    this.httpClient.post<IUserInfo>(env.base_url + env.rout_url.user, userAuth)
       .subscribe(
         result => {
           sessionStorage.setItem("user", JSON.stringify(result));

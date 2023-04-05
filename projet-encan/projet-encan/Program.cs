@@ -11,14 +11,13 @@ using System.Text.Json.Serialization;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
+
 builder.Services.AddScoped<IClientService, ClientService>();
 builder.Services.AddScoped<IBiddingService, BiddingService>();
 builder.Services.AddScoped<IItemService, ItemService>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<IRapportService, RapportService>();
-
-SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
-
 
 
 builder.Services.AddControllers().AddJsonOptions(x =>
@@ -47,6 +46,7 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("DEFAULT_POLICY");
+app.UseAuthorization();
 //app.UseRouting();
 
 //app.MapControllerRoute(
