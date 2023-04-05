@@ -11,6 +11,7 @@ export class ItemUpdateComponent implements OnInit {
 
   private httpClient: HttpClient;
   private activeRoute: ActivatedRoute;
+  public showImageInput = false;
   public item: item | undefined;
   public router: Router;
   constructor(router: Router, http: HttpClient, activeRoute: ActivatedRoute) {
