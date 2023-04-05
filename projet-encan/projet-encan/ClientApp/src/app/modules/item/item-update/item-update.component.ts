@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { item } from '../item-list/item-list.component';
+import {env} from "../../../../environments/env";
 @Component({
   selector: 'app-item-update',
   templateUrl: './item-update.component.html',
@@ -31,7 +32,7 @@ export class ItemUpdateComponent implements OnInit {
   save() {
     if (this.item != undefined) {
       this.httpClient.put(`https://localhost:7138/api/item`, this.item).
-        subscribe(result => window.location.reload());
+        subscribe(result => this.router.navigateByUrl(env.rout_url.item), error => console.error(error));
     }
   }
 }

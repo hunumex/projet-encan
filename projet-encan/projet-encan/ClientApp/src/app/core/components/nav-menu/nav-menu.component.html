@@ -3,7 +3,7 @@
     <h3>l'Encan de l'Espoir</h3>
     <ul>
       <li><a [routerLink]="['']">Accueil</a></li>
-      <li *ngIf="isAdmin"><a [routerLink]="['/admin']">Espace Admin</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/item']">Espace Admin</a></li>
       <li *ngIf="isAdmin"><a [routerLink]="['/rapport']">Rapport</a></li>
       <li><a [routerLink]="['/contact']">Contactez-nous</a></li>
       <li id="logout" (click)="deconnexion()">Deconnexion</li>

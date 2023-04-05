@@ -1,7 +1,7 @@
-
+<app-nav-menu></app-nav-menu>
 <div class="row justify-content-md-center">
-  <
     <div class="col-5">
+      <a [routerLink]="['/item']">Revenir a la list</a>
       <h4 id="tableLabel"> Information sur l'article</h4>
       <label>Nom:</label><input type="text" class="form-control" [(ngModel)]="item.name" />
       <label>prix:</label><input type="number" class="form-control" [(ngModel)]="item.price" />
@@ -28,5 +28,6 @@
 
       <input class="btn btn-primary mb-3" type="submit" (click)="addItem()" value="save" />
     </div>
-  
+
 </div>
+<app-footer></app-footer>

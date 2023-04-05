@@ -19,8 +19,9 @@ const routes: Routes =
     { path: env.rout_url.contact, component: ContactComponent, pathMatch: 'full', canActivate:[AuthGuard] },
     { path: env.rout_url.bidding+'/:id', component: BiddingComponent, pathMatch: 'full', canActivate:[AuthGuard] },
     { path: env.rout_url.rapport, component: RapportComponent, pathMatch: 'full', canActivate:[AuthGuard, AuthorizationGuard] },
-    { path: 'item-add', component: ItemAddComponent },
-    { path: 'item-update/:id', component: ItemUpdateComponent },
+    { path: env.rout_url.item , component: ItemListComponent, pathMatch: 'full', canActivate:[AuthGuard, AuthorizationGuard] },
+    { path: env.rout_url.item_add , component: ItemAddComponent, pathMatch: 'full', canActivate:[AuthGuard, AuthorizationGuard]  },
+    { path: env.rout_url.item_update + '/:id', component: ItemUpdateComponent, pathMatch: 'full', canActivate:[AuthGuard, AuthorizationGuard]  },
   ];
 
 @NgModule({
