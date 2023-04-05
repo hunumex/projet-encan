@@ -1,5 +1,6 @@
 export class Item {
   constructor(
+    public Id: number | null = null,
     public Name: string | null = null,
     public ImagePath: string | null = null,
     public Price: number | null = null,

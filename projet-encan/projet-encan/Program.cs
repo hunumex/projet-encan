@@ -19,6 +19,12 @@ builder.Services.AddScoped<IRapportService, RapportService>();
 
 SecurityMethods.AddJwtAuthentication(builder.Services, builder.Configuration);
 
+
+
+builder.Services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+builder.Services.AddControllers();
+builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Projet_encan_APIContext")));
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("DEFAULT_POLICY", policy =>
@@ -29,11 +35,6 @@ builder.Services.AddCors(options =>
                .AllowAnyMethod();
     });
 });
-builder.Services.AddControllers().AddJsonOptions(x =>
-                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
-builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<AncanDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Projet_encan_APIContext")));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -46,13 +47,12 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseCors("DEFAULT_POLICY");
-app.UseRouting();
+//app.UseRouting();
 
+//app.MapControllerRoute(
+//    name: "default",
+//    pattern: "{controller}/{action=Index}/{id?}");
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
-
-app.MapFallbackToFile("index.html");
-
+//app.MapFallbackToFile("index.html");
+app.MapControllers();
 app.Run();

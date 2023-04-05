@@ -1,0 +1,40 @@
+<h1>Items</h1>
+<p *ngIf="!items"><em>Loading...</em></p>
+<button type="button" [routerLink]="['/item-add']"  class="btn btn-primary">Ajouter un article</button>
+<table *ngIf="items" class="table">
+  <thead>
+    <tr>
+      <th>Id</th>
+      <th>Article</th>
+      <th>Image</th>
+      <th>description</th>
+      <th>vendeur</th>
+      <th>postingYear</th>
+
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let item of items">
+      <td>{{item.id}}</td>
+      <td>
+        Designation:{{item.name}}<br />
+        prix:{{ item.price}}<br />
+        etat:{{ item.condition}}<br />
+        Disponible:{{ item.available}}
+      </td>
+      <td><img src="http://localhost:7138/{{item.imagePath}}" ></td>
+      <td>{{ item.description}}</td>
+      <td>
+        Nom:{{ item.vendorName}}<br />
+        email:{{ item.vendorEmail}}<br />
+        Telephone:{{ item.vendorPhone}}
+      </td>
+      <td>{{ item.postingYear}}</td>
+
+      <td>
+        <button type="button" (click)="deleteItem(item.id)" class="btn btn-danger">Supprimer</button>&nbsp;
+        <button type="button"  [routerLink]="['/item-update',item.id]"  class="btn btn-secondary">Modifier</button>
+      </td>
+    </tr>
+  </tbody>
+</table>
