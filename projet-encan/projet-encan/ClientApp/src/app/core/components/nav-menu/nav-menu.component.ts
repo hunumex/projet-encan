@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import {TokenService} from "../../services/token.service";
 
 @Component({
   selector: 'app-nav-menu',
@@ -7,6 +8,10 @@ import { Component } from '@angular/core';
 })
 export class NavMenuComponent {
   isExpanded = false;
+  isAdmin: boolean;
+  constructor(private tokenService: TokenService) {
+    this.isAdmin = this.tokenService.isAdmin();
+  }
 
   collapse() {
     this.isExpanded = false;
@@ -17,6 +22,7 @@ export class NavMenuComponent {
   }
 
   deconnexion(){
-
+    this.tokenService.removeTokenAndAuthority();
+    window.location.reload();
   }
 }

@@ -2,9 +2,9 @@
   <nav id="top">
     <h3>l'Encan de l'Espoir</h3>
     <ul>
-      <li><a [routerLink]="['/home']">Accueil</a></li>
-      <li><a [routerLink]="['/admin']">Espace Admin</a></li>
-      <li><a [routerLink]="['/rapport']">Rapport</a></li>
+      <li><a [routerLink]="['']">Accueil</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/admin']">Espace Admin</a></li>
+      <li *ngIf="isAdmin"><a [routerLink]="['/rapport']">Rapport</a></li>
       <li><a [routerLink]="['/contact']">Contactez-nous</a></li>
       <li id="logout" (click)="deconnexion()">Deconnexion</li>
 
@@ -12,7 +12,7 @@
   </nav>
   <nav id="bottom">
     <div class="img">
-      <a [routerLink]="['/home']">
+      <a [routerLink]="['']">
         <img src="../../../../assets/images/logo.png" alt="" srcset="">
       </a>
     </div>

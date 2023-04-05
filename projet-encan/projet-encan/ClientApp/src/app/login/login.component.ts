@@ -1,7 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import {IUserInfo} from "../core/interfaces/IUserInfo";
+import {UserAuth} from "../core/models/userAuth.model";
+import {TokenService} from "../core/services/token.service";
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,7 @@ export class LoginComponent {
   public submitted = false;
 
 
-  constructor(private router: Router,private httpClient: HttpClient,private fb: FormBuilder) {
+  constructor(private router: Router,private httpClient: HttpClient,private fb: FormBuilder, private token: TokenService) {
     this.createForm();
   }
 
@@ -43,16 +46,17 @@ export class LoginComponent {
   get f() { return this.loginForm.controls; }
 
   login(userAuth: UserAuth) {
-    this.httpClient.post<UserInfo>(`https://localhost:7138/user`, userAuth)
+    this.httpClient.post<IUserInfo>(`https://localhost:7138/user`, userAuth)
       .subscribe(
         result => {
           sessionStorage.setItem("user", JSON.stringify(result));
           console.log(result);
+          this.token.saveToken(result.token);
+          this.token.saveAuthority(result.isAdmin);
           // sessionStorage.setItem("token", result.token);
-          //this.router.navigate(['/accueil']).then(() => {
-
-          //  // window.location.reload();
-          //});
+          this.router.navigate(['']).then(() => {
+             window.location.reload();
+          });
         }, error => {
           console.log(error)
           this.messageError = error.error;
@@ -60,16 +64,4 @@ export class LoginComponent {
       )
   }
 
-}
-
-export class UserAuth {
-  userName: string | any;
-  password: string | any
-}
-
-export interface UserInfo {
-  id: string;
-  userName: string;
-  token: string;
-  isAdmin: boolean
 }

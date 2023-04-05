@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../core/services/http.service";
 import {ActivatedRoute, Router} from "@angular/router";
 import {Bidding} from "../../core/models/bidding.request";
-import {Item} from "../../core/models/item.request";
+import {env} from "../../../environments/env";
 
 @Component({
   selector: 'app-bidding',
@@ -54,7 +54,8 @@ validator: number = 0;
 
     if(this.lastnameValidat() && this.firstnameValidat() && this.emailValidat() && this.phonenumberValidat() && this.bidpriceValidat()){
       this.ApiService.addData(bid).addBidding.subscribe(data => {
-        this.routeNavigate.navigate(['/home', {biddingSuccess: true}]);
+        console.log(data);
+        this.routeNavigate.navigate([env.rout_url.home]);
       }, error => console.error(error));
     }
   }

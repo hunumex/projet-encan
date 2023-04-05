@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {ApiService} from "../../core/services/http.service";
-import {ActivatedRoute, Router} from "@angular/router";
 
 @Component({
   selector: 'app-home',
@@ -10,8 +9,6 @@ import {ActivatedRoute, Router} from "@angular/router";
 export class HomeComponent implements OnInit {
 
   items!: any;
-  biddingSuccess: boolean = true;
-  lastBiddings!: any;
 
   constructor(private ApiService: ApiService) {
   }
