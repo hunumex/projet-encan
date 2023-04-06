@@ -52,6 +52,15 @@ namespace projet_encan.Controllers
 
             return Ok();
         }
+        [HttpPut("putImage")]
+        public async Task<ActionResult<Item>> PutItemAsync([FromForm] ItemDTO item)
+        {
+            if (item == null) return BadRequest();
+
+            await _itemService.UpdateItemAsync(item);
+
+            return Ok();
+        }
         [HttpDelete("{id}")]
         public async Task<ActionResult<Item>> DeleteItemAsync(int id)
         {

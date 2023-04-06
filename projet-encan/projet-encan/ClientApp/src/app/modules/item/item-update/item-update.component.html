@@ -12,8 +12,23 @@
           <option value=true>Neuf</option>
           <option value=false>Usage</option>
         </select>
-        <label>image:</label> <input type="file" id="imageItem" accept="image/*" class="form-control" required>
+        <!-- <label>image:</label> <input type="file" id="imageItem" accept="image/*" class="form-control" required>-->
 
+          <label>Image:</label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="showImageInput" id="imageSwitch">
+            <label class="form-check-label" for="imageSwitch">Utiliser un fichier</label>
+          </div>
+
+          <!-- Afficher l'entrée de fichier -->
+          <div *ngIf="showImageInput">
+            <label>image:</label> <input (change)="onFileSelected($event)" type="file" id="imageItem" accept="image/*" class="form-control" required>
+          </div>
+
+          <!-- Afficher l'entrée d'image -->
+          <div *ngIf="!showImageInput">
+            <label>image:</label> <img src="" alt="" />
+          </div>
         <label>disponible:</label>
         <select [(ngModel)]="item.available" class="form-select" value="" required>
           <option value="">-- Selectionner la disponibilité de l'article -- </option>

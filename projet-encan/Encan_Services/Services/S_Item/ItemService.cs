@@ -71,6 +71,29 @@ namespace Encan_Services.Services.S_Item
             _context.Items.Update(item);
             await _context.SaveChangesAsync();
         }
+        public async Task UpdateItemAsync([FromForm] ItemDTO item)
+        {
+            var itemTemp = await _context.Items.FindAsync(item.Id);
+
+            if (itemTemp == null) throw new ArgumentException($"{nameof(item)} no exists.");
+
+            _context.Entry(itemTemp).State = EntityState.Detached;
+
+
+            itemTemp.Name = item.Name;
+                itemTemp.Available = item.Available;
+                itemTemp.Condition = item.Condition;
+                itemTemp.Price = item.Price;
+                itemTemp.Description = item.Description;
+                itemTemp.VendorEmail = item.VendorEmail;
+                itemTemp.VendorName = item.VendorName;
+                itemTemp.VendorPhone = item.VendorPhone;
+
+            
+            await SaveImage(item.ImagePath, itemTemp);
+            _context.Items.Update(itemTemp);
+            await _context.SaveChangesAsync();
+        }
         private async Task<bool> SaveImage(IFormFile file, Item item)
         {
             var pathBuilt = Path.Combine("Wwwroot\\images");

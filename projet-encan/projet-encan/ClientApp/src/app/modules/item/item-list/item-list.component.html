@@ -1,5 +1,5 @@
 <app-nav-menu></app-nav-menu>
-<h1>Items</h1>
+<h1>Gestion des articles </h1>
 <p *ngIf="!items"><em>Loading...</em></p>
 <button type="button" [routerLink]="['/item-add']"  class="btn btn-primary">Ajouter un article</button>
 <table *ngIf="items" class="table">
@@ -10,7 +10,7 @@
       <th>Image</th>
       <th>description</th>
       <th>vendeur</th>
-      <th>postingYear</th>
+      <th>Année de post</th>
 
     </tr>
   </thead>
@@ -23,7 +23,7 @@
         etat:{{ item.condition}}<br />
         Disponible:{{ item.available}}
       </td>
-      <td><img src="http://localhost:7138/{{item.imagePath}}" ></td>
+      <td><img  width="100" height="100" src="https://localhost:7138/{{item.imagePath}}"></td>
       <td>{{ item.description}}</td>
       <td>
         Nom:{{ item.vendorName}}<br />

@@ -15,6 +15,7 @@ namespace Encan_Services.Services.S_Item
         Task<Item> GetItemAsync(int id);
         Task AddItemAsync([FromForm]ItemDTO item);
         Task UpdateItemAsync(Item item);
+        Task UpdateItemAsync([FromForm] ItemDTO item);
         Task DeleteItemAsync(int id);
     }
 }

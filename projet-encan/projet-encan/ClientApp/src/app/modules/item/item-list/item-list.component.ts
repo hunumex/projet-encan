@@ -39,11 +39,11 @@ export class ItemListComponent implements OnInit {
 export interface item {
   id: any;
   name: string;
-  imagePath: string ;
+  imagePath: File|any ;
   price: number ;
-  condition: boolean ;
+  condition: any ;
   description: string ;
-  available: boolean ;
+  available: any ;
   vendorName: string ;
   vendorEmail: string ;
   vendorPhone: string ;
