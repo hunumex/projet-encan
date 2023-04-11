@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
-import { item } from '../item-list/item-list.component';
+import { Item } from '../item-list/item-list.component';
 import {env} from "../../../../environments/env";
 @Component({
   selector: 'app-item-update',
@@ -13,7 +13,7 @@ export class ItemUpdateComponent implements OnInit {
   private httpClient: HttpClient;
   private activeRoute: ActivatedRoute;
   public showImageInput = false;
-  public item: item | any;
+  public item: Item | any;
   public router: Router;
   private idItem!: number;
   constructor(router: Router, http: HttpClient, activeRoute: ActivatedRoute) {
@@ -24,7 +24,7 @@ export class ItemUpdateComponent implements OnInit {
   public ngOnInit() {
     this.idItem = parseInt(this.activeRoute.snapshot.params['id']);
     console.log(this.idItem);
-    this.httpClient.get<item>(`https://localhost:7138/api/item/${this.idItem}`).subscribe(result => {
+    this.httpClient.get<Item>(`https://localhost:7138/api/item/${this.idItem}`).subscribe(result => {
       this.item = result;
       console.log(result)
     }, error => { console.error(error) }
@@ -46,7 +46,9 @@ export class ItemUpdateComponent implements OnInit {
 
     }
   }
-
+  onSubmit() {
+    console.log(this.item);
+  }
   onFileSelected(event: Event) {
     const element = event.target as HTMLInputElement;
     this.item.imagePath = element.files?.[0];

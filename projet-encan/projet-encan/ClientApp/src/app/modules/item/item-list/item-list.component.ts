@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ItemUpdateComponent } from '../item-update/item-update.component';
 import { ApiService } from '../../../core/services/http.service'
+import {env} from "../../../../environments/env";
 
 @Component({
   selector: 'app-item-list',
@@ -10,9 +11,11 @@ import { ApiService } from '../../../core/services/http.service'
   styleUrls: ['./item-list.component.css']
 })
 export class ItemListComponent implements OnInit {
+  page: number = 1;
   public idItem: number = 0;
   private httpClient: HttpClient;
   public items: any;
+  public baseUrl = env.base_url;
   @ViewChild(ItemUpdateComponent) itemUpdate: ItemUpdateComponent | undefined;
 
   constructor(http: HttpClient, private router: Router, private service: ApiService) {
@@ -36,11 +39,11 @@ export class ItemListComponent implements OnInit {
 
 
 }
-export interface item {
+export interface Item {
   id: any;
   name: string;
   imagePath: File|any ;
-  price: number ;
+  price: number | any;
   condition: any ;
   description: string ;
   available: any ;

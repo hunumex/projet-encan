@@ -10,13 +10,15 @@ import {FooterComponent} from "./core/components/footer/footer.component";
 import { ItemListComponent } from './modules/item/item-list/item-list.component';
 import { ItemAddComponent } from './modules/item/item-add/item-add.component';
 import { ItemUpdateComponent } from './modules/item/item-update/item-update.component';
-import { LoginComponent } from './login/login.component';
+import { LoginComponent } from './modules/login/login.component';
 import { ContactComponent } from './modules/contact/contact.component';
 import {HomeComponent} from "./modules/home/home.component";
 import {BiddingComponent} from "./modules/bidding/bidding.component";
 import { RapportComponent } from './modules/rapport/rapport.component';
 import {TokenInterceptorProvider} from "./core/services/token.interceptor";
 import {CookieService } from "ngx-cookie";
+import {NgxPaginationModule} from "ngx-pagination";
+
 
 @NgModule({
   declarations: [
@@ -37,7 +39,8 @@ import {CookieService } from "ngx-cookie";
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    NgxPaginationModule
   ],
   providers: [CookieService, TokenInterceptorProvider ],
   bootstrap: [AppComponent]

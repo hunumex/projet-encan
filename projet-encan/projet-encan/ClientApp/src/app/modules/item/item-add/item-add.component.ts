@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../../core/services/http.service'
+import {env} from "../../../../environments/env";
 
 @Component({
   selector: 'app-item-add',
@@ -12,7 +13,19 @@ export class ItemAddComponent {
 
   private httpClient: HttpClient;
   private activeRoute: ActivatedRoute;
-  public item: item = new item();
+  public item: Item = {
+    name: "" ,
+    imagePath: File ,
+    price: null ,
+    condition: undefined ,
+    description: "" ,
+    available: undefined ,
+    vendorName: "" ,
+    vendorEmail: "",
+    vendorPhone: "" ,
+    postingYear: new Date()
+  };
+
   public router: Router;
 
   constructor(router: Router, http: HttpClient, activeRoute: ActivatedRoute,private service: ApiService) {
@@ -21,6 +34,7 @@ export class ItemAddComponent {
     this.activeRoute = activeRoute;
 
   }
+
   addItem() {
     //console.log(this.item.available)
     //console.log(this.item.condition)
@@ -33,7 +47,7 @@ export class ItemAddComponent {
     this.onUpload();
 
     //console.log(this.item);
-    //this.service.addData(this.item).addItem.subscribe(result => window.location.reload());
+    //this.service.addData(this.item).addItem.subscribe(result => this.router.navigate([env.rout_url.item]));
   }
   onFileSelected(event: Event) {
     const element = event.target as HTMLInputElement;
@@ -47,7 +61,7 @@ export class ItemAddComponent {
       return;
     }
 
-    const formData = new FormData();
+    let formData = new FormData();
     formData.append('imagePath', this.item.imagePath);
     formData.append('name', this.item.name);
     formData.append('price', this.item.price.toString());
@@ -57,27 +71,29 @@ export class ItemAddComponent {
     formData.append('vendorEmail', this.item.vendorEmail);
     formData.append('vendorPhone', this.item.vendorPhone);
     formData.append('postingYear', this.item.postingYear.toDateString());
-
+    console.log(formData);
+    console.log(this.item.imagePath);
   //  this.service.addData(this.item).addItem.subscribe(result => window.location.reload());
-    this.httpClient.post('https://localhost:7138/api/item', formData).subscribe(response => {
-      console.log('Image téléchargée avec succès !', response);
+      this.httpClient.post('https://localhost:7138/api/item', formData).subscribe(response => {
+        //console.log('Image téléchargée avec succès !', response);
+        this.router.navigate([env.rout_url.item]);
     }, error => {
       console.error('Erreur lors du téléchargement de l\'image', error);
     });
   }
 }
-export class item {
+export interface Item {
 
-  name: string = null!;
+  name: string ;
   imagePath: File | any;
-  price: number = null!;
-  condition: any = null!;
-  description: string = null!;
-  available: any = null!;
-  vendorName: string = null!;
-  vendorEmail: string = null!;
-  vendorPhone: string = null!;
-  postingYear: Date = null!;
+  price: number | any;
+  condition: any ;
+  description: string ;
+  available: any ;
+  vendorName: string ;
+  vendorEmail: string;
+  vendorPhone: string ;
+  postingYear: Date ;
 
-} 
+}
 

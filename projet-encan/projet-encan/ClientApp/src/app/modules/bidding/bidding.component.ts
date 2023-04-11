@@ -16,6 +16,7 @@ item!: any;
 bidByItem: any = null;
 client!: any;
 validator: number = 0;
+public baseUrl = env.base_url;
 
   constructor(private ApiService: ApiService, private route: ActivatedRoute, private routeNavigate: Router) {
     this.itenId = parseInt(this.route.snapshot.params['id']);
@@ -141,6 +142,8 @@ validator: number = 0;
       return false;
     }else{
       if(this.bidByItem != null){
+        console.log("bidding Price",this.bidByItem.biddingPrice);
+        console.log("item price", this.item.price);
         if(parseInt(bidprice.value) <= this.bidByItem.biddingPrice){
           bidprice.classList.add('is-invalid');
           return false;
@@ -151,6 +154,10 @@ validator: number = 0;
           return true;
         }
       }else{
+        if(parseInt(bidprice.value) <= this.item.price){
+          bidprice.classList.add('is-invalid');
+          return false;
+        }
         bidprice.classList.remove('is-invalid');
         bidprice.classList.add('is-valid');
         return true

@@ -1,42 +1,64 @@
 <app-nav-menu></app-nav-menu>
-<h1>Gestion des articles </h1>
-<p *ngIf="!items"><em>Loading...</em></p>
-<button type="button" [routerLink]="['/item-add']"  class="btn btn-primary">Ajouter un article</button>
-<table *ngIf="items" class="table">
-  <thead>
-    <tr>
-      <th>Id</th>
-      <th>Article</th>
-      <th>Image</th>
-      <th>description</th>
-      <th>vendeur</th>
-      <th>Année de post</th>
+<div id="container">
+  <div id="i-container">
+    <div id="title" class="shadow-sm">
+      <h4 style="margin-top: 10px;" class="text-center mb-4">Gestion des articles</h4>
+    </div>
+    <div id="add-item">
+      <button type="button" [routerLink]="['/item-add']"  class="btn btn-primary" style="display: flex; gap: 10px; align-items: center;" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle" viewBox="0 0 16 16">
+          <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"/>
+        </svg>
+        Ajouter un article
+      </button>
+    </div>
+    <div id="item-list" class="shadow-sm" >
+      <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Article</th>
+          <th>Image</th>
+          <th>Description</th>
+          <th>Prix</th>
+          <th>État</th>
+          <th>Disponible</th>
+          <th>Vendeur</th>
+          <th>Email</th>
+          <th>Téléphone</th>
+          <th>Année de publication</th>
+          <th>Supprimer</th>
+          <th>Modifier</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let item of items | paginate: { itemsPerPage: 5, currentPage: page}">
+          <td>{{item.id}}</td>
+          <td>{{item.name}}</td>
+          <td><img src="https://localhost:7138/{{item.imagePath}}" alt="{{item.name}}" width="50"></td>
+          <td>{{item.description | slice:0:125 }}{{ item.description.length > 125 ? '...' : '' }}</td>
+          <td>{{item.price}}</td>
+          <td>{{item.condition}}</td>
+          <td>{{item.available}}</td>
+          <td>{{item.vendorName}}</td>
+          <td>{{item.vendorEmail}}</td>
+          <td>{{item.vendorPhone}}</td>
+          <td>{{item.postingYear}}</td>
+          <td><button type="button" class="btn btn-danger" (click)="deleteItem(item.id)">Supprimer</button></td>
+          <td><button type="button" class="btn btn-secondary" [routerLink]="['/item-update', item.id]">Modifier</button></td>
+        </tr>
+        </tbody>
+      </table>
 
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let item of items">
-      <td>{{item.id}}</td>
-      <td>
-        Designation:{{item.name}}<br />
-        prix:{{ item.price}}<br />
-        etat:{{ item.condition}}<br />
-        Disponible:{{ item.available}}
-      </td>
-      <td><img  width="100" height="100" src="https://localhost:7138/{{item.imagePath}}"></td>
-      <td>{{ item.description}}</td>
-      <td>
-        Nom:{{ item.vendorName}}<br />
-        email:{{ item.vendorEmail}}<br />
-        Telephone:{{ item.vendorPhone}}
-      </td>
-      <td>{{ item.postingYear}}</td>
+      <pagination-controls (pageChange)="page = $event"></pagination-controls>
 
-      <td>
-        <button type="button" (click)="deleteItem(item.id)" class="btn btn-danger">Supprimer</button>&nbsp;
-        <button type="button"  [routerLink]="['/item-update',item.id]"  class="btn btn-secondary">Modifier</button>
-      </td>
-    </tr>
-  </tbody>
-</table>
+    </div>
+    <!--<div class="row">
+      <div class="col">
+        <pagination-controls (pageChange)="page = $event"></pagination-controls>
+      </div>
+    </div>-->
+  </div>
+</div>
 <app-footer></app-footer>

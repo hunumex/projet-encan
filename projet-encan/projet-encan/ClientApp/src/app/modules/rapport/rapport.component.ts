@@ -8,7 +8,10 @@ import { ApiService } from 'src/app/core/services/http.service';
 })
 export class RapportComponent implements OnInit {
 
+  page: number = 1;
+  rapportParPage: number = 10;
   rapports!: any;
+  showAllRapport: boolean = false;
 
   constructor(private apiService: ApiService) {
 

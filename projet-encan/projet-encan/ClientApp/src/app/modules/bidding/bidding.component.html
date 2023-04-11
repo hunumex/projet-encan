@@ -4,7 +4,7 @@
   <div id="b-top">
     <div id="b-item">
       <div class="card" style="width: 18rem;" *ngIf="item">
-        <img src="../../../../assets/images/89.jpg" class="card-img-top" alt="...">
+        <img src="https://localhost:7138/{{item.imagePath}}" class="card-img-top" alt="...">
         <div class="card-body">
           <h5 class="card-title">{{item.name}}</h5>
           <p class="card-text">{{item.description}}.</p>
@@ -19,22 +19,22 @@
     <div id="b-bidding">
       <form>
         <div class="mb-3 has-validation">
-          <label for="lastname" class="form-label">Nom*</label>
+          <label for="lastname" class="form-label">Nom<span style="color: red">*</span></label>
           <input  type="text" name="lastname" value="" class="form-control b-lastname" aria-describedby="lastname-validat" id="lastname" placeholder="ex: jean" minlength="3" maxlength="45" size="45" required>
           <div id="lastname-validat" class="invalid-feedback">Veiller à entrer un nom.</div>
         </div>
         <div class="mb-3">
-          <label for="firstName" class="form-label">Prenom*</label>
+          <label for="firstName" class="form-label">Prenom<span style="color: red">*</span></label>
           <input  type="text" name="firstName" value="" class="form-control b-firstName" aria-describedby="firstName-validate" id="firstName" placeholder="ex: surette" minlength="3" maxlength="45" size="45" required>
           <div id="firstName-validat" class="invalid-feedback">Veiller à entrer un prénom.</div>
         </div>
         <div class="mb-3">
-          <label for="email" class="form-label">Courriel*</label>
+          <label for="email" class="form-label">Courriel<span style="color: red">*</span></label>
           <input  type="email" name="email" value="" class="form-control b-email" id="email" aria-describedby="email-validate" title="Veuillez entrer un bon Email." placeholder="name@example.com" size="64" minlength="3" maxlength="64" required>
           <div id="email-validat" class="invalid-feedback">Veiller à entrer un nom.</div>
         </div>
         <div>
-          <label for="phonenumber" class="form-label">Ton numero*</label>
+          <label for="phonenumber" class="form-label">Ton numero<span style="color: red">*</span> </label>
           <div class="input-group mb-3">
             <span class="input-group-text">+1</span>
             <input  type="tel" id="phonenumber" minlength="10" maxlength="12" size="12" name="phonenumber" value=""
@@ -45,16 +45,13 @@
           </div>
         </div>
         <div>
-          <label for="bidprice" class="form-label">Ton enchère*</label>
+          <label for="bidprice" class="form-label">Ton enchère<span style="color: red">*</span></label>
           <div class="input-group mb-3">
             <span class="input-group-text">$</span>
             <input  type="number" id="bidprice" name="bidprice" aria-describedby="bid-validate" value=""  max="1000000" step="any" class="form-control b-bidprice" aria-label="Amount (to the nearest dollar)" required>
             <span class="input-group-text">0.00</span>
             <div id="bid-validat" class="invalid-feedback">
-              Entrez une enchère correcte.
-              - Assurez-vous qu'elle soit pas négatif.
-              - Assurez-vous qu'elle soit inférieur a 1 000 000.
-              - Assurez-vous qu'elle est supérieure à l'enchère précèdent.
+              Le champ d'enchère doit être rempli et être supérieur à la valeur de base ou à la dernière enchère enregistrée.
             </div>
 
           </div>
@@ -62,7 +59,7 @@
         <div id="b-button">
           <span><button type="submit" class="btn btn-primary" (click)="bidding()">Enchérir</button></span>
           <span><button class="btn btn-primary btn-clear" (click)="clear()">Effacer</button></span>
-          <i>Les champs Marques d'un * sont obligatoires.</i>
+          <i>Les champs Marques d'un <span style="color: red">*</span> sont obligatoires.</i>
         </div>
       </form>
     </div>

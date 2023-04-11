@@ -1,52 +1,110 @@
 <app-nav-menu></app-nav-menu>
-<div class="row justify-content-md-center">
+<div id="container">
+  <div id="i-update-container">
+    <div id="title" class="shadow-sm">
+      <h4 style="margin-top: 10px;" class="text-center mb-4">Mise à jour de l'article</h4>
+    </div>
 
-    <div class="col-5">
-      <div *ngIf="item">
-        <h4 id="tableLabel"> Information sur l'article</h4>
-        <label>Nom:</label><input type="text" class="form-control" [(ngModel)]="item.name" />
-        <label>prix:</label><input type="number" class="form-control" [(ngModel)]="item.price" />
+    <div id="go-back-btn">
+      <button type="button" [routerLink]="['/item']"  class="btn btn-primary" style="display: flex; gap: 10px; align-items: center;" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-left-square" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M15 2a1 1 0 0 0-1-1H2a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V2zM0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V2zm11.5 5.5a.5.5 0 0 1 0 1H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5z"/>
+        </svg>
+        Revenir a la list
+      </button>
+    </div>
+
+    <form id="i-update-content"
+          *ngIf="item" name="f"
+          #f="ngForm"
+          (ngSubmit)="f.form.valid && save()">
+
+      <div id="article" class="shadow-sm">
+        <h4 class="tableLabel"> Information sur l'article</h4>
+        <label>Nom:</label><input type="text" class="form-control" [(ngModel)]="item.name" name="name" #name="ngModel" required/>
+        <div
+          class="alert alert-danger"
+          *ngIf="name.errors && f.submitted">
+          Veuillez renseigner le nom de l'article.
+        </div>
+        <label>prix:</label><input type="number" class="form-control" [(ngModel)]="item.price" name="price" #price="ngModel" required/>
+        <div
+          class="alert alert-danger"
+          *ngIf="price.errors && f.submitted">
+          Le prix est obligatoire. Veuillez le renseigner.
+        </div>
         <label>condition:</label>
-        <select [(ngModel)]="item.condition" class="form-select" value="" required>
+        <select [(ngModel)]="item.condition" class="form-select" value="" name="condition" #condition="ngModel" required>
           <option value="">-- Selectionner l'état de l'article -- </option>
           <option value=true>Neuf</option>
           <option value=false>Usage</option>
         </select>
-        <!-- <label>image:</label> <input type="file" id="imageItem" accept="image/*" class="form-control" required>-->
+        <div
+          class="alert alert-danger"
+          *ngIf="condition.errors && f.submitted">
+          Veuillez préciser l'état de l'article.
+        </div>
+        <label>image:</label> <input type="file" id="imageItem" accept="image/*" class="form-control" required>
 
-          <label>Image:</label>
-          <div class="form-check form-switch">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="showImageInput" id="imageSwitch">
-            <label class="form-check-label" for="imageSwitch">Utiliser un fichier</label>
-          </div>
+        <label>Image:</label>
+        <div class="form-check form-switch">
+          <input class="form-check-input" type="checkbox" [(ngModel)]="showImageInput" id="imageSwitch">
+          <label class="form-check-label" for="imageSwitch">Utiliser un fichier</label>
+        </div>
 
-          <!-- Afficher l'entrée de fichier -->
-          <div *ngIf="showImageInput">
-            <label>image:</label> <input (change)="onFileSelected($event)" type="file" id="imageItem" accept="image/*" class="form-control" required>
-          </div>
+        <!-- Afficher l'entrée de fichier -->
+        <div *ngIf="showImageInput">
+          <label>image:</label> <input (change)="onFileSelected($event)" type="file" id="imageItem" accept="image/*" class="form-control" required>
+        </div>
 
-          <!-- Afficher l'entrée d'image -->
-          <div *ngIf="!showImageInput">
-            <label>image:</label> <img src="" alt="" />
-          </div>
+        <!-- Afficher l'entrée d'image -->
+        <div *ngIf="!showImageInput">
+          <label>image:</label> <img src="" alt="" />
+        </div>
         <label>disponible:</label>
-        <select [(ngModel)]="item.available" class="form-select" value="" required>
+        <select [(ngModel)]="item.available" class="form-select" value="" name="available" #available="ngModel" required>
           <option value="">-- Selectionner la disponibilité de l'article -- </option>
           <option value=true>Oui</option>
           <option value=false>Non</option>
         </select>
-        <label>description:</label><textarea rows="4" cols="50" class="form-control" [(ngModel)]="item.description"></textarea>
-
-        <h4 id="tableLabel"> Information sur le vendeur</h4>
-        <label>nom et prenom:</label><input type="text" class="form-control" [(ngModel)]="item.vendorName" />
-        <label>Adresse email:</label><input type="email" class="form-control" [(ngModel)]="item.vendorEmail" />
-        <label>Numero de telephone:</label><input type="text" class="form-control" [(ngModel)]="item.vendorPhone" />
-
-        <input class="btn btn-primary mb-3" type="submit" (click)="save()" value="save" />
+        <div
+          class="alert alert-danger"
+          *ngIf="available.errors && f.submitted">
+          La disponibilité de l'article doit être renseignée.
+        </div>
+        <label>description:</label><textarea rows="4" cols="50" class="form-control" [(ngModel)]="item.description" name="description" #description="ngModel" required></textarea>
+        <div
+          class="alert alert-danger"
+          *ngIf="description.errors && f.submitted">
+          Veuillez ajouter une description de l'article.
+        </div>
       </div>
-    </div>
 
-  <div *ngIf="!item">item non trouve</div>
+      <div id="vendor" class="shadow-sm">
+        <h4 id="tableLabel"> Information sur le vendeur</h4>
+        <label>nom et prenom:</label><input type="text" class="form-control" [(ngModel)]="item.vendorName" name="vendorName" #vendorName="ngModel" required/>
+        <div
+          class="alert alert-danger"
+          *ngIf="vendorName.errors && f.submitted">
+          Le nom et prénom du vendeur sont obligatoires.
+        </div>
+        <label>Adresse email:</label><input type="email" class="form-control" [(ngModel)]="item.vendorEmail" name="vendorEmail" #vendorEmail="ngModel" required/>
+        <div
+          class="alert alert-danger"
+          *ngIf="vendorEmail.errors && f.submitted">
+          Veuillez saisir une adresse email valide.
+        </div>
+        <label>Numero de telephone:</label><input type="text" class="form-control" [(ngModel)]="item.vendorPhone" name="vendorPhone" #vendorPhone="ngModel" required/>
+        <div
+          class="alert alert-danger"
+          *ngIf="vendorPhone.errors && f.submitted">
+          Le numéro de téléphone doit être renseigné.
+        </div>
 
+        <input class="btn btn-primary mb-3" type="submit" value="save" />
+      </div>
+
+    </form>
+  </div>
 </div>
 <app-footer></app-footer>

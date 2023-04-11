@@ -2,10 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { env } from '../../environments/env';
-import {IUserInfo} from "../core/interfaces/IUserInfo";
-import { UserAuth } from '../core/models/UserAuth.model';
-import {TokenService} from "../core/services/token.service";
+import { env } from '../../../environments/env';
+import {IUserInfo} from "../../core/interfaces/IUserInfo";
+import { UserAuth } from '../../core/models/UserAuth.model';
+import {TokenService} from "../../core/services/token.service";
 
 @Component({
   selector: 'app-login',
@@ -51,9 +51,8 @@ export class LoginComponent {
       .subscribe(
         result => {
           sessionStorage.setItem("user", JSON.stringify(result));
-          console.log(result);
           this.token.saveToken(result.token);
-          this.token.saveAuthority(result.isAdmin);
+          //this.token.saveAuthority(result.isAdmin);
           // sessionStorage.setItem("token", result.token);
           this.router.navigate(['']).then(() => {
              window.location.reload();
